@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/smallhelm/diff-lines#readme",
   "devDependencies": {
+    "lodash": "^4.13.1",
     "tape": "^4.6.0"
   },
   "dependencies": {
