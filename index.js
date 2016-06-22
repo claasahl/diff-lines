@@ -27,16 +27,24 @@ module.exports = function(a, b, opts){
   if(n_surrounding >= 0){
     var short_out = {};
     lines_with_change.forEach(function(line_i){
-      var i;
+      var i, j;
       for(i = -n_surrounding; i < n_surrounding + 1; i++){
-        short_out[line_i + i] = out[line_i + i];
+        j = line_i + i;
+        if(j >= 0 && j < out.length){
+          short_out[j] = out[j];
+        }
       }
     });
     out = [];
+    var last_key;
     var key;
     for(key in short_out){
       if(short_out.hasOwnProperty(key)){
+        if(last_key !== undefined && parseInt(key) !== (parseInt(last_key) + 1)){
+          out.push('@@');
+        }
         out.push(short_out[key]);
+        last_key = key;
       }
     }
   }

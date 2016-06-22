@@ -25,20 +25,20 @@ test('basics', function(t){
 });
 
 test('n_surrounding', function(t){
-  var lines = _.map(_.range(0, 100), function(i){
+  var lines = _.map(_.range(0, 101), function(i){
     return 'line ' + i;
   });
 
   var a = lines.join('\n');
   var b = _.map(lines, function(line, i){
-    if(i === 50){
+    if(i % 25 === 0){
       return 'change ' + i;
     }
     return line;
   }).join('\n');
 
   var expected = _.flattenDeep(_.map(lines, function(line, i){
-    if(i === 50){
+    if(i % 25 === 0){
       return [
         '-line ' + i,
         '+change ' + i
@@ -50,6 +50,40 @@ test('n_surrounding', function(t){
   t.equals(diff(a, b), expected);
 
   expected = '';
+  expected += '-line 0\n';
+  expected += '+change 0\n';
+  expected += '@@\n';
+  expected += '-line 25\n';
+  expected += '+change 25\n';
+  expected += '@@\n';
+  expected += '-line 50\n';
+  expected += '+change 50\n';
+  expected += '@@\n';
+  expected += '-line 75\n';
+  expected += '+change 75\n';
+  expected += '@@\n';
+  expected += '-line 100\n';
+  expected += '+change 100';
+  t.equals(diff(a, b, {
+    n_surrounding: 0
+  }), expected);
+
+  expected = '';
+  expected += '-line 0\n';
+  expected += '+change 0\n';
+  expected += ' line 1\n';
+  expected += ' line 2\n';
+  expected += ' line 3\n';
+  expected += '@@\n';
+  expected += ' line 22\n';
+  expected += ' line 23\n';
+  expected += ' line 24\n';
+  expected += '-line 25\n';
+  expected += '+change 25\n';
+  expected += ' line 26\n';
+  expected += ' line 27\n';
+  expected += ' line 28\n';
+  expected += '@@\n';
   expected += ' line 47\n';
   expected += ' line 48\n';
   expected += ' line 49\n';
@@ -57,16 +91,24 @@ test('n_surrounding', function(t){
   expected += '+change 50\n';
   expected += ' line 51\n';
   expected += ' line 52\n';
-  expected += ' line 53';
+  expected += ' line 53\n';
+  expected += '@@\n';
+  expected += ' line 72\n';
+  expected += ' line 73\n';
+  expected += ' line 74\n';
+  expected += '-line 75\n';
+  expected += '+change 75\n';
+  expected += ' line 76\n';
+  expected += ' line 77\n';
+  expected += ' line 78\n';
+  expected += '@@\n';
+  expected += ' line 97\n';
+  expected += ' line 98\n';
+  expected += ' line 99\n';
+  expected += '-line 100\n';
+  expected += '+change 100';
   t.equals(diff(a, b, {
     n_surrounding: 3
-  }), expected);
-
-  expected = '';
-  expected += '-line 50\n';
-  expected += '+change 50';
-  t.equals(diff(a, b, {
-    n_surrounding: 0
   }), expected);
 
   t.end();
