@@ -1,6 +1,6 @@
 {
   "name": "diff-lines",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Given two strings, show the lines that differ. (similar to `git diff`)",
   "main": "index.js",
   "files": [
