@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Given two strings, show the lines that differ. (similar to `git diff`)",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "node tests.js"
   },
