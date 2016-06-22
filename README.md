@@ -27,5 +27,9 @@ Output:
 +four
 ```
 
+## API
+### diff(a, b[, options])
+* `options.n_surrounding` - number of lines surrounding a diff to show. (default -1, show all lines)
+
 ## License
 MIT

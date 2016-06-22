@@ -24,7 +24,7 @@ test('basics', function(t){
   t.end();
 });
 
-test('n_surrounding_lines', function(t){
+test('n_surrounding', function(t){
   var lines = _.map(_.range(0, 100), function(i){
     return 'line ' + i;
   });
@@ -48,6 +48,26 @@ test('n_surrounding_lines', function(t){
   })).join('\n');
 
   t.equals(diff(a, b), expected);
+
+  expected = '';
+  expected += ' line 47\n';
+  expected += ' line 48\n';
+  expected += ' line 49\n';
+  expected += '-line 50\n';
+  expected += '+change 50\n';
+  expected += ' line 51\n';
+  expected += ' line 52\n';
+  expected += ' line 53';
+  t.equals(diff(a, b, {
+    n_surrounding: 3
+  }), expected);
+
+  expected = '';
+  expected += '-line 50\n';
+  expected += '+change 50';
+  t.equals(diff(a, b, {
+    n_surrounding: 0
+  }), expected);
 
   t.end();
 });
