@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/smallhelm/diff-lines/issues"
   },
-  "homepage": "https://github.com/smallhelm/diff-lines#readme"
+  "homepage": "https://github.com/smallhelm/diff-lines#readme",
+  "devDependencies": {
+    "tape": "^4.6.0"
+  },
+  "dependencies": {
+    "diff": "^2.2.3"
+  }
 }
